@@ -8,6 +8,10 @@ class BankAccountTest(unittest.TestCase):
         testAccount = bank.BankAccount()
         self.assertEqual(type(testAccount), bank.BankAccount)
 
+    def test_02_new_account_zero_balance(self):
+        testAccount = bank.BankAccount()
+        self.assertEqual(testAccount.balance, 0)
+
 
 if __name__ == "__main__":
     unittest.main()
