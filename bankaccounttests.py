@@ -16,6 +16,11 @@ class BankAccountTest(unittest.TestCase):
         testAccount = bank.BankAccount(50)
         self.assertEqual(testAccount.balance, 50)
 
+    def test_04_deposit_increments_balance(self):
+        testAccount = bank.BankAccount()
+        testAccount.deposit(25)
+        self.assertEqual(testAccount.balance, 25)
+
 
 if __name__ == "__main__":
     unittest.main()
