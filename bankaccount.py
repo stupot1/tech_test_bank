@@ -6,16 +6,31 @@ class BankAccount:
 
     def deposit(self, amount):
         self.balance += amount
-        transaction_data = {'credit': amount, 'balance': self.balance}
+        transaction_data = {
+            'amount': amount,
+            'balance': self.balance,
+            'type': "deposit"
+            }
         self.transactions.append(transaction_data)
 
     def withdraw(self, amount):
         self.balance -= amount
+        transaction_data = {
+            'amount': amount,
+            'balance': self.balance,
+            'type': "withdraw"
+            }
+        self.transactions.append(transaction_data)
 
     def display_statement(self):
-        statement = "date || credit || debit || balance\n"
+        statement = "date || credit || debit || balance"
 
         for i in self.transactions:
-            statement += (f"11/08/2020 || {'%.2f' % i['credit']} || || {'%.2f' % i['balance']}")
+            statement += ("\n11/08/2020 || ")
+            if i['type'] == "withdraw":
+                statement += (f"|| {'%.2f' % i['amount']} || ")
+            elif i['type'] == "deposit":
+                statement += (f"{'%.2f' % i['amount']} || || ")
+            statement += (f"{'%.2f' % i['balance']}")
 
         return(statement)
