@@ -82,6 +82,14 @@ class BankAccountTest(unittest.TestCase):
                          f"{date.strftime('%d/%m/%Y')} || 250.00 || || 500.00"
                          )
 
+    def test_12_deposit_date_can_be_specified(self):
+        testAccount = bankaccount.BankAccount()
+        testAccount.deposit(25, "10/08/2020")
+        self.assertEqual(
+                         testAccount.transactions[0]['date'],
+                         datetime.datetime(2020, 8, 10, 0, 0)
+                         )
+
 
 if __name__ == "__main__":
     unittest.main()

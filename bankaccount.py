@@ -7,10 +7,15 @@ class BankAccount:
         self.balance = starting_balance
         self.transactions = []
 
-    def deposit(self, amount):
+    def deposit(self, amount, date=None):
         self.balance += amount
+        if date is None:
+            date = datetime.date.today()
+        else:
+            date = datetime.datetime.strptime(date, '%d/%m/%Y')
+
         transaction_data = {
-            'date': datetime.date.today(),
+            'date': date,
             'amount': amount,
             'balance': self.balance,
             'type': "deposit"
