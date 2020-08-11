@@ -8,12 +8,10 @@ class BankAccount:
         self.transactions = []
 
     def deposit(self, amount, date=None):
-        self.balance += amount
-        self.__add_transaction(self.__format_date(date), amount, "deposit")
+        Transaction.transaction(self, amount, date, "deposit")
 
     def withdraw(self, amount, date=None):
-        self.balance -= amount
-        self.__add_transaction(self.__format_date(date), amount, "withdraw")
+        Transaction.transaction(self, amount, date, "withdraw")
 
     def display_statement(self):
         statement = "date || credit || debit || balance"
@@ -27,16 +25,34 @@ class BankAccount:
             statement += (f"{'%.2f' % i['balance']}")
         return(statement)
 
-    def __add_transaction(self, date, amount, type):
+
+class Transaction:
+
+    def transaction(account, amount, date, type):
+        Transaction.__update_balance(account, amount, type)
+        Transaction.__add_transaction(
+                                    account,
+                                    Transaction.__format_date(date),
+                                    amount,
+                                    type
+                                    )
+
+    def __update_balance(account, amount, type):
+        if type == "deposit":
+            account.balance += amount
+        elif type == "withdraw":
+            account.balance -= amount
+
+    def __add_transaction(account, date, amount, type):
         transaction_data = {
                             'date': date,
                             'amount': amount,
-                            'balance': self.balance,
+                            'balance': account.balance,
                             'type': type
                             }
-        self.transactions.append(transaction_data)
+        account.transactions.append(transaction_data)
 
-    def __format_date(self, date):
+    def __format_date(date):
         if date is None:
             return datetime.date.today()
         else:

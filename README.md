@@ -26,9 +26,21 @@ date || credit || debit || balance
 
 ## System Design
 
+### BankAccount Class
+
 * Class to be created with balance varaible tracking the account balance and transactions list that will keep a record of all the transactions that occur on the account.
-* Interaction to the account will be through`deposit` and`withdraw` functions that will take the input of the account, amount and transaction date.
+* Interaction to the account will be through`deposit` and`withdraw` functions that will take the input of the account, amount and transaction date. This will call the Transaction Class : `transaction` function to change the account data.
 * Statement for the transactions on the account can be viewed with`display_balance` function, the output format is shown in the assumptions.
+
+### Transaction Class
+
+* Class will contain class functions that are called from the BankAccount Class.
+* Access function is called `transaction(account, amount, date, type)`
+  * Account is the bank account to access
+  * Amount is the transaction amount
+  * Date is the transaction date - if left blank defaults to today
+  * Type is to specify between the deposit and withdraw functions
+* Transaction function will perform the balnce update and append the transaction to the account list owned by the account.
 
 ## Test Plan
 
@@ -53,7 +65,7 @@ This is the test steps that will be used to build up the functionality through T
 
 Instructions to exectute the test suite on the application.
 
-###Pre-Requisites
+### Pre-Requisites
 
 * Python 3.x or later installed (this can checked by running:`python --version`, output should be something like this:`Python 3.8.5`
 * Unittest framework is included as a standar library in Python 3.x and later.
@@ -98,3 +110,7 @@ The following are the instructions to use the application.
 * User can view the human-readable statement using the following command. Note that the `display_statement()` is wrapped in the `print` statement, this is to ensure the formatting is displayed correctly as the application returns the data in a `return` rather than printed to the std output.~~~~
 
 `print(account.display_statement())`
+
+## Follow Up Actions
+
+* Extract the display function into a separate class to show SRP and modular approach better.
