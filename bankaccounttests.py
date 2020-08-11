@@ -34,7 +34,7 @@ class BankAccountTest(unittest.TestCase):
                          "date || credit || debit || balance\n"
                          "14/01/2012 || || 500.00 || 2500.00\n"
                          "13/01/2012 || 2000.00 || || 3000.00\n"
-                         "11/01/2012 || 1000.00 || || 1000.00"
+                         "10/01/2012 || 1000.00 || || 1000.00"
                          )
 
     def test_07_display_statement_real_desposit_amount(self):
@@ -96,6 +96,18 @@ class BankAccountTest(unittest.TestCase):
         self.assertEqual(
                          testAccount.transactions[0]['date'],
                          datetime.datetime(2020, 8, 10, 0, 0)
+                         )
+
+    def test_14_display_statement_full_real_data(self):
+        testAccount = bankaccount.BankAccount()
+        testAccount.deposit(1000, "10/01/2012")
+        testAccount.deposit(2000, "13/01/2012")
+        testAccount.withdraw(500, "14/01/2012")
+        self.assertEqual(testAccount.display_statement(),
+                         "date || credit || debit || balance\n"
+                         "14/01/2012 || || 500.00 || 2500.00\n"
+                         "13/01/2012 || 2000.00 || || 3000.00\n"
+                         "10/01/2012 || 1000.00 || || 1000.00"
                          )
 
 

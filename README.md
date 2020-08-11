@@ -23,4 +23,4 @@ This is an excercise to demostrate design process and TDD appraoch with a simple
 11. Display - Statement can be viewed in correct format and order ~~~~with real incomplete data (with todays date)
 12. Deposit - Transaction date can be set in call to deposit
 13. WIthdraw - Transaction date can be set in call to withdraw
-14. Display - Statement can be viewed in correct format with real incomplete data (with customised date)
+14. Display - Statement can be viewed in correct format with real complete data (with customised date) (CUSTOMER ACCEPTANCE TEST)
