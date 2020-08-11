@@ -30,8 +30,9 @@ class BankAccount:
     def display_statement(self):
         statement = "date || credit || debit || balance"
 
-        for i in self.transactions:
-            statement += ("\n11/08/2020 || ")
+        for i in reversed(self.transactions):
+            statement += ("\n")
+            statement += (f"{i['date'].strftime('%d/%m/%Y')} || ")
             if i['type'] == "withdraw":
                 statement += (f"|| {'%.2f' % i['amount']} || ")
             elif i['type'] == "deposit":

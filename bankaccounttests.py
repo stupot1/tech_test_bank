@@ -40,17 +40,19 @@ class BankAccountTest(unittest.TestCase):
     def test_07_display_statement_real_desposit_amount(self):
         testAccount = bankaccount.BankAccount()
         testAccount.deposit(500)
+        date = datetime.datetime.today()
         self.assertEqual(testAccount.display_statement(),
                          "date || credit || debit || balance\n"
-                         "11/08/2020 || 500.00 || || 500.00"
+                         f"{date.strftime('%d/%m/%Y')} || 500.00 || || 500.00"
                          )
 
     def test_08_display_statement_real_withdraw_amount(self):
         testAccount = bankaccount.BankAccount(1000)
         testAccount.withdraw(500)
+        date = datetime.datetime.today()
         self.assertEqual(testAccount.display_statement(),
                          "date || credit || debit || balance\n"
-                         "11/08/2020 || || 500.00 || 500.00"
+                         f"{date.strftime('%d/%m/%Y')} || || 500.00 || 500.00"
                          )
 
     def test_09_default_deposit_date_is_today(self):
@@ -60,7 +62,7 @@ class BankAccountTest(unittest.TestCase):
                          testAccount.transactions[0]['date'],
                          datetime.date.today()
                          )
-    
+
     def test_10_default_withdraw_date_is_today(self):
         testAccount = bankaccount.BankAccount(50)
         testAccount.withdraw(25)
@@ -68,6 +70,18 @@ class BankAccountTest(unittest.TestCase):
                          testAccount.transactions[0]['date'],
                          datetime.date.today()
                          )
+
+    def test_11_display_statement_real_todays_date_and_amounts(self):
+        testAccount = bankaccount.BankAccount(250)
+        testAccount.deposit(250)
+        testAccount.withdraw(400)
+        date = datetime.datetime.today()
+        self.assertEqual(testAccount.display_statement(),
+                         "date || credit || debit || balance\n"
+                         f"{date.strftime('%d/%m/%Y')} || || 400.00 || 100.00\n"
+                         f"{date.strftime('%d/%m/%Y')} || 250.00 || || 500.00"
+                         )
+
 
 if __name__ == "__main__":
     unittest.main()
