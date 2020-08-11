@@ -1,5 +1,6 @@
 import unittest
 import bankaccount
+import datetime
 
 
 class BankAccountTest(unittest.TestCase):
@@ -22,8 +23,7 @@ class BankAccountTest(unittest.TestCase):
         self.assertEqual(testAccount.balance, 25)
 
     def test_05_withdraw_decrements_balance(self):
-        testAccount = bankaccount.BankAccount()
-        testAccount.deposit(25)
+        testAccount = bankaccount.BankAccount(25)
         testAccount.withdraw(10)
         self.assertEqual(testAccount.balance, 15)
 
@@ -52,6 +52,15 @@ class BankAccountTest(unittest.TestCase):
                          "date || credit || debit || balance\n"
                          "11/08/2020 || || 500.00 || 500.00"
                          )
+
+    def test_09_default_deposit_date_is_today(self):
+        testAccount = bankaccount.BankAccount()
+        testAccount.deposit(25)
+        self.assertEqual(
+                         testAccount.transactions[0]['date'],
+                         datetime.date.today()
+                         )
+
 
 if __name__ == "__main__":
     unittest.main()

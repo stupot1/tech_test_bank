@@ -1,3 +1,6 @@
+import datetime
+
+
 class BankAccount:
 
     def __init__(self, starting_balance=0):
@@ -7,6 +10,7 @@ class BankAccount:
     def deposit(self, amount):
         self.balance += amount
         transaction_data = {
+            'date': datetime.date.today(),
             'amount': amount,
             'balance': self.balance,
             'type': "deposit"
