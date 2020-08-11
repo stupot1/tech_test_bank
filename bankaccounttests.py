@@ -27,6 +27,7 @@ class BankAccountTest(unittest.TestCase):
         testAccount.withdraw(10)
         self.assertEqual(testAccount.balance, 15)
 
+    @unittest.expectedFailure
     def test_06_display_statement_dummy_data(self):
         testAccount = bankaccount.BankAccount()
         self.assertEqual(testAccount.display_statement(),
@@ -36,6 +37,13 @@ class BankAccountTest(unittest.TestCase):
                          "11/01/2012 || 1000.00 || || 1000.00"
                          )
 
+    def test_07_display_statement_real_despoit_amount(self):
+        testAccount = bankaccount.BankAccount()
+        testAccount.deposit(500)
+        self.assertEqual(testAccount.display_statement(),
+                         "date || credit || debit || balance\n"
+                         "11/08/2020 || 500.00 || || 500.00"
+                         )
 
 if __name__ == "__main__":
     unittest.main()
