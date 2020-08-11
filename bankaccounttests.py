@@ -60,7 +60,14 @@ class BankAccountTest(unittest.TestCase):
                          testAccount.transactions[0]['date'],
                          datetime.date.today()
                          )
-
+    
+    def test_10_default_withdraw_date_is_today(self):
+        testAccount = bankaccount.BankAccount(50)
+        testAccount.withdraw(25)
+        self.assertEqual(
+                         testAccount.transactions[0]['date'],
+                         datetime.date.today()
+                         )
 
 if __name__ == "__main__":
     unittest.main()

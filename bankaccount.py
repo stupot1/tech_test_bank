@@ -20,6 +20,7 @@ class BankAccount:
     def withdraw(self, amount):
         self.balance -= amount
         transaction_data = {
+            'date': datetime.date.today(),
             'amount': amount,
             'balance': self.balance,
             'type': "withdraw"
