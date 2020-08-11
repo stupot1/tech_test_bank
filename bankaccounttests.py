@@ -1,23 +1,23 @@
 import unittest
-import bankaccount as bank
+import bankaccount
 
 
 class BankAccountTest(unittest.TestCase):
 
     def test_01_new_account(self):
-        testAccount = bank.BankAccount()
-        self.assertEqual(type(testAccount), bank.BankAccount)
+        testAccount = bankaccount.BankAccount()
+        self.assertEqual(type(testAccount), bankaccount.BankAccount)
 
     def test_02_new_account_zero_balance(self):
-        testAccount = bank.BankAccount()
+        testAccount = bankaccount.BankAccount()
         self.assertEqual(testAccount.balance, 0)
 
     def test_03_new_account_fifty_balance(self):
-        testAccount = bank.BankAccount(50)
+        testAccount = bankaccount.BankAccount(50)
         self.assertEqual(testAccount.balance, 50)
 
     def test_04_deposit_increments_balance(self):
-        testAccount = bank.BankAccount()
+        testAccount = bankaccount.BankAccount()
         testAccount.deposit(25)
         self.assertEqual(testAccount.balance, 25)
 
