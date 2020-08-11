@@ -13,7 +13,6 @@ class BankAccount:
             date = datetime.date.today()
         else:
             date = datetime.datetime.strptime(date, '%d/%m/%Y')
-
         transaction_data = {
             'date': date,
             'amount': amount,
@@ -22,10 +21,14 @@ class BankAccount:
             }
         self.transactions.append(transaction_data)
 
-    def withdraw(self, amount):
+    def withdraw(self, amount, date=None):
         self.balance -= amount
+        if date is None:
+            date = datetime.date.today()
+        else:
+            date = datetime.datetime.strptime(date, '%d/%m/%Y')
         transaction_data = {
-            'date': datetime.date.today(),
+            'date': date,
             'amount': amount,
             'balance': self.balance,
             'type': "withdraw"
