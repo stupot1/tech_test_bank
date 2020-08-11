@@ -41,4 +41,3 @@ class BankAccount:
             return datetime.date.today()
         else:
             return datetime.datetime.strptime(date, '%d/%m/%Y')
-
