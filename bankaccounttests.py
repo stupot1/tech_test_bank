@@ -56,7 +56,7 @@ class BankAccountTest(unittest.TestCase):
     def test_09_default_deposit_date_is_today(self):
         self.testAcc.deposit(25)
         self.assertEqual(
-                         self.testAcc.transactions[0]['date'],
+                         self.testAcc.transactions[0].date,
                          datetime.date.today()
                          )
 
@@ -64,7 +64,7 @@ class BankAccountTest(unittest.TestCase):
         testAccount = bankaccount.BankAccount(50)
         testAccount.withdraw(25)
         self.assertEqual(
-                         testAccount.transactions[0]['date'],
+                         testAccount.transactions[0].date,
                          datetime.date.today()
                          )
 
@@ -81,7 +81,7 @@ class BankAccountTest(unittest.TestCase):
     def test_12_deposit_date_can_be_specified(self):
         self.testAcc.deposit(25, "10/08/2020")
         self.assertEqual(
-                         self.testAcc.transactions[0]['date'],
+                         self.testAcc.transactions[0].date,
                          datetime.datetime(2020, 8, 10, 0, 0)
                          )
 
@@ -89,7 +89,7 @@ class BankAccountTest(unittest.TestCase):
         testAccount = bankaccount.BankAccount(50)
         testAccount.withdraw(25, "10/08/2020")
         self.assertEqual(
-                         testAccount.transactions[0]['date'],
+                         testAccount.transactions[0].date,
                          datetime.datetime(2020, 8, 10, 0, 0)
                          )
 

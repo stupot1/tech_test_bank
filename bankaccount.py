@@ -1,4 +1,5 @@
-import datetime
+from transaction import Transaction
+from statement import Statement
 
 
 class BankAccount:
@@ -8,52 +9,28 @@ class BankAccount:
         self.transactions = []
 
     def deposit(self, amount, date=None):
-        Transaction.transaction(self, amount, date, "deposit")
+        type = "deposit"
+        self.__handle_transaction(amount, date, type)
 
     def withdraw(self, amount, date=None):
-        Transaction.transaction(self, amount, date, "withdraw")
+        type = "withdraw"
+        self.__handle_transaction(amount, date, type)
 
     def display_statement(self):
-        statement = "date || credit || debit || balance"
-        for i in reversed(self.transactions):
-            statement += ("\n")
-            statement += (f"{i['date'].strftime('%d/%m/%Y')} || ")
-            if i['type'] == "withdraw":
-                statement += (f"|| {'%.2f' % i['amount']} || ")
-            elif i['type'] == "deposit":
-                statement += (f"{'%.2f' % i['amount']} || || ")
-            statement += (f"{'%.2f' % i['balance']}")
-        return(statement)
+        return Statement.display(Statement(), self.transactions)
 
+    def __handle_transaction(self, amount, date, type):
+        self.__update_balance(amount, type)
+        t = Transaction(
+                        amount,
+                        date,
+                        type,
+                        self.balance
+                        )
+        self.transactions.append(t)
 
-class Transaction:
-
-    def transaction(account, amount, date, type):
-        Transaction.__update_balance(account, amount, type)
-        Transaction.__add_transaction(
-                                    account,
-                                    Transaction.__format_date(date),
-                                    amount,
-                                    type
-                                    )
-
-    def __update_balance(account, amount, type):
+    def __update_balance(self, amount, type):
         if type == "deposit":
-            account.balance += amount
+            self.balance += amount
         elif type == "withdraw":
-            account.balance -= amount
-
-    def __add_transaction(account, date, amount, type):
-        transaction_data = {
-                            'date': date,
-                            'amount': amount,
-                            'balance': account.balance,
-                            'type': type
-                            }
-        account.transactions.append(transaction_data)
-
-    def __format_date(date):
-        if date is None:
-            return datetime.date.today()
-        else:
-            return datetime.datetime.strptime(date, '%d/%m/%Y')
+            self.balance -= amount
